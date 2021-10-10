@@ -16,7 +16,7 @@ import com.demo.neo.soft.springboot.application.exception.UserServiceException;
 import com.demo.neo.soft.springboot.application.model.ResponseObject;
 import com.demo.neo.soft.springboot.application.repository.UserRegistrationRepository;
 import com.demo.neo.soft.springboot.application.service.UserRegistrationService;
-import com.demo.neo.soft.springboot.application.exception.UserNotFoundException;
+
 
 
 
@@ -46,7 +46,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 	public UserRegistration getUsersByFirstName(String firstName) {
 		Optional<UserRegistration> optionalUser = repository.findByFirstName(firstName);
 		if (!optionalUser.isPresent()) {
-			throw new UserNotFoundException();	
+			throw new UserServiceException(InternalStandardError.USER_NOT_FOUND);	
 		}
 		UserRegistration userRegistration = optionalUser.get();
 		return userRegistration;
